@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 箭头函数： 1.简写 2.固定this指向
+    const obj = {
+        a: 2,
+        func: function() {
+            console.log(this.a)
+        }
+    }
+    obj.func()
+
+    let oDate = new Date()
+    oDate.func = obj.func
+    oDate.func() // undefined  此时this指向一个Date实例
+
+    obj.funcA = () => {
+        console.log(this.a)
+    }
+    oDate.funcA = obj.funcA
+    oDate.funcA() // undefined  此时this被固定，指向window
+
+
+    class Json {
+        constructor(){
+            this.a = 3;
+        }
+        fn = () => {
+                console.log(this.a)
+        }
+    }
+
+    oDate.fn = new Json().fn
+    oDate.fn() // 3 此时this被固定，指向一个Json实例对象
+
+
+    // 函数参数收集，展开语法
+    // 参数收集
+    function collection(a, b, ...c) {
+        console.log(c) // [4, 5, 6]
+    }
+    collection(2, 3, 4, 5, 6)
+
+    let arr1 = [1, 2, 3]
+    let arr2 = [4, 5, 6]
+    console.log([...arr1, ...arr2]) //[1, 2, 3, 4, 5, 6]
+
+    // 展开json对象
+    let jsonA = {a: 1, b: 2, c: 3}
+    let jsonB = {
+        ...jsonA,
+        d: 4,
+        e: 5,
+    }
+    console.log(jsonB) //{a: 1, b: 2, c: 3, d: 4, e: 5}
+    </script>
+</body>
+</html>

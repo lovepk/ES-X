@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // Promise之前异步操作有很多种，写法也千差万别
+    // 有了Promise后  可以用统一的规范来封装各种各样的异步操作啦
+
+    let p = new Promise((resolve, reject) => {
+        // if (异步操作想要的结果) {
+        //     resolve(异步操作想要的结果)
+        // }
+        // if (异步操作不想要的结果) {
+        //     resolve(异步操作不想要的结果)
+        // }
+    })
+
+    // p.then(resolve, reject) 
+
+    p.then(() => {
+
+    }, () => {
+
+    })
+
+    // Promise.all(iterable) 方法返回一个 Promise 实例，
+    // iterable 参数内所有的 promise 都“完成（resolved）”或参数中不包含 promise 时回调完成（resolve）；
+    // 如果参数中  promise 有一个失败（rejected），此实例回调失败（reject），失败的原因是第一个失败 promise 的结果
+    // Promise.all   Promise的静态方法，Promise的实例没有这个方法
+
+
+
+    // Promise.race 方法返回一个 promise，一旦迭代器中的某个promise解决或拒绝，返回的 promise就会解决或拒绝
+    const promise1 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 500, 'one');
+    });
+
+    const promise2 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 100, 'two');
+    });
+
+    const promise3 = new Promise((resolve, reject) => {
+        setTimeout(reject, 50, 'three');
+    });
+
+    Promise.race([promise1, promise2, promise3]).then((value) => {
+        console.log(value);
+        // Both resolve, one reject,  but promise3 is faster, so the reject is run
+    }, err => {
+        console.log(err);
+    });
+
+
+    // await  操作符用于等待一个Promise 对象。它只能在异步函数 async function 中使用。
+    // 本质上还是异步的，用同步的写法习惯，语法糖写异步操作，就像在写同步代码一样
+    // 一般要和try catch 组合使用来抛出等待的promise的错误
+
+    async function f2() {
+        var y = await 20;
+        console.log(y); // 20
+    }
+    f2();
+
+
+    </script>
+</body>
+</html>

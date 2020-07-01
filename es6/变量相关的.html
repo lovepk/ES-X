@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 原来变量声明存在问题： 1. 重复声明的问题 2.随意更改的问题（缺少常量的语法层面的支持） 3.缺少块级作用域的问题
+
+        /**  重复声明的问题
+        var a = 2;
+        var a = 4;
+        **/
+
+        // 解决方案：
+        let a = 4;
+        //let a = 5; //Uncaught SyntaxError: Identifier 'a' has already been declared
+
+        const b = 5;
+        //const b = 6; // Uncaught SyntaxError: Identifier 'b' has already been declared
+
+        /**  随意更改的问题
+        var b = 5;
+        b = 6;
+        **/
+
+        // 解决方案：
+        const c = 5;
+        //c = 6; //VM171:1 Uncaught TypeError: Assignment to constant variable.
+
+
+        // var 声明的变量是函数级作用域的变量
+
+        for (var i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i+'A')  // 打印了5个5
+            });
+
+            (function(i) {
+                setTimeout(function () {
+                    console.log(i+'B')  // 打印了5个5
+                });
+            })(i);
+        }
+
+        // let const 都是块级作用域
+
+        for (let i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i+'A')  // 正常打印0A 1A 2A ...
+            });
+        }
+
+
+        /**
+        var 重复声明；不能限制修改；函数级作用域
+        let 不能重复声明；变量；块级
+        cont 不能重复声明；常量；块级
+        **/
+
+        // 变量的解构赋值语法
+        // 1.解构赋值语法两边结构必须相同 2.解构赋值语法的右边必须是合法的 3.解构和赋值同时完成
+    </script>
+
+
+    let总结：
+    1. 基本用法。let也是用来声明变量，用法类似于var，但是所声明的变量，只在let命令所在的代码块有效
+    2. 不存在变量提升。let不像var那样，会发生变量提升现象
+    3. 暂时性死区。只要块级作用域内存在let命令，它所声明的变量就绑定在这个区域，不再受外部影响
+    4.不允许重复声明。let不允许在相同作用域内，重复声明同一个变量。
+</body>
+</html>

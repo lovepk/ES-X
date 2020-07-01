@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // map 根据原数组生成一个数组与原数组映射的数组  一一对应
+        // reduce n=>1
+        // filter 过滤
+        // foreach 总是遍历一遍
+        const score = [59, 65, 69, 99, 78, 45];
+        const mapResult = score.map(item => item >= 60 ? '及格' : '不及格');
+        console.log(mapResult);
+
+        const qiuHe = score.reduce((temp, item, index) => {
+            console.log(temp)
+            return temp + item;
+        });
+
+        // json 写法 json对象
+        //  模板字符串
+    </script>
+</body>
+</html>
